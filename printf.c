@@ -13,7 +13,7 @@
 int printIdentifiers(char next, va_list arg)
 {
 int functsIndex;
-identifierStruct functs[]
+identifierStruct functs[] = 
 {
 {"c", print_char},
 {"s", print_str},
@@ -66,7 +66,7 @@ continue;
 if (format[i] == '\0')
 return (-1);
 
-identifierPrinted = printIdentifiers(format[i+1], args);
+identifierPrinted = printIdentifiers(format[i+1], arg);
 
 if (identifierPrinted == -1 || identifierPrinted != 0)
 i++;
