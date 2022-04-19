@@ -3,6 +3,8 @@
 #include <stdarg.h>
 #include <stddef.h>
 
+#include <stdarg.h>
+
 int _putchar(char c);
 int print_int(va_list arg);
 int print_number(va_list);
