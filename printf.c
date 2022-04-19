@@ -18,7 +18,8 @@ int printIdentifiers(char next, va_list arg)
 		{"s", print_str},
 		{"%", print_percent},
 		{"d", print_int},
-		{"i", print_int}
+		{"i", print_int},
+		{"b", print_binary}
 	};
 
 	for (functsIndex = 0; functs[functsIndex].indentifier != NULL; functsIndex++)
