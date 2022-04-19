@@ -5,82 +5,72 @@
 /**
 *printIdentifiers - print special characters
 *@next: character after %
-*@va_list: argument for the identifier
-*Return - the number of characters prited
+*@arg: argument for the identifier
+*Return: the number of characters prited
 *
-**/
+*/
 
 int printIdentifiers(char next, va_list arg)
 {
-int functsIndex;
-identifierStruct functs[]
-{
-{"c", print_char},
-{"s", print_str},
-{"d", print_int},
-{"i", print_int},
-{"u", print_unsigned},
-{"b", print_unsignedToBinary},
-{"o", print_oct},
-{"x", print_hex},
-{"X", print_HEX},
-{"S", print_STR},
-{NULL, NULL}
-};
+	int functsIndex;
+	identifierStruct functs[] = {
+		{"c", print_char},
+		{"s", print_str},
+		{"%", print_percent}
+	};
 
-for(functsIndex = 0; functs[functsIndex].indentifier != NULL; functsIndex++)
-{
-if (functs[functsIndex].indentifier[0] == next)
-return (functs[functsIndex].printer(arg));
-}
-return (0);
+	for (functsIndex = 0; functs[functsIndex].indentifier != NULL; functsIndex++)
+	{
+		if (functs[functsIndex].indentifier[0] == next)
+			return (functs[functsIndex].printer(arg));
+	}
+	return (0);
 }
 
 /**
 *_printf - print output accorfing to the format
 *@format: character String
-*Return - number of characters printed or -1 for incomplete identifiers
+*Return: number of characters printed or -1 for incomplete identifiers
 */
 int _printf(const char *format, ...)
 {
-unsigned int i;
-int identifierPrinted = 0, charPrinted = 0;
-va_list arg;
+	unsigned int i;
+	int identifierPrinted = 0, charPrinted = 0;
+	va_list arg;
 
-va_start(arg, format);
-if (format == NULL)
-{
-return (-1);
-}
+	va_start(arg, format);
+	if (format == NULL)
+	{
+		return (-1);
+	}
 
-for (i = 0; format[i] != '\0'; i++)
-{
+	for (i = 0; format[i] != '\0'; i++)
+	{
+		if (format[i] != '%')
+		{
+			_putchar(format[i]);
+			charPrinted++;
+			continue;
+		}
 
-if (format[i] != '%')
-{
-_putchar(format[i]);
-charPrinted++;
-continue;
-}
+		if (format[i] == '\0')
+			return (-1);
 
-if (format[i] == '\0')
-return (-1);
+		identifierPrinted = printIdentifiers(format[i + 1], arg);
 
-identifierPrinted = printIdentifiers(format[i+1], args);
+		if (identifierPrinted == -1 || identifierPrinted != 0)
+			i++;
 
-if (identifierPrinted == -1 || identifierPrinted != 0)
-i++;
+		if (identifierPrinted > 0)
+			charPrinted += identifierPrinted;
 
-if (identifierPrinted > 0)
-charPrinted +=identifierPrinted;
+		if (identifierPrinted == 0)
+		{
+			_putchar('%');
+			charPrinted++;
+		}
+	}
 
-if (identifierPrinted == 0)
-{
-_putchar('%');
-charPrinted++;
-}
-}
-
-va_end(arg);
-return (charPrinted);
+	va_end(arg);
+	return (charPrinted);
 }

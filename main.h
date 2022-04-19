@@ -1,17 +1,25 @@
 #ifndef MAIN_H
 #define MAIN_H
+#include <stdarg.h>
+#include <stddef.h>
 
 int _putchar(char c);
 int print_int(va_list arg);
 int print_unsigned(va_list arg);
 int _printf(const char *format, ...);
+int print_char(va_list arg);
+int print_str(va_list arg);
+int print_percent(va_list);
 
-
+/**
+ * struct identifierStruct - structure definition of a printTypeStruct
+ * @indentifier: type
+ * @printer: function to print
+ */
 typedef struct identifierStruct
 {
-char *identifier;
-int (*printer)(va_list);
+	char *indentifier;
+	int (*printer)(va_list);
 } identifierStruct;
-
 
 #endif
