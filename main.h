@@ -20,6 +20,12 @@ int print_oct(va_list arg);
 int print_unsignedIntToHex(unsigned int num, char _case);
 int print_hex_base(va_list arg, char _case);
 int print_hex(va_list arg);
+int unsigned_integer(va_list);
+int print_octal(va_list list);
+int print_hex(va_list list);
+int print_heX(va_list list);
+int hex_check(int, char);
+int print_unsgined_number(unsigned int n);
 
 /**
  * struct identifierStruct - structure definition of a printTypeStruct
